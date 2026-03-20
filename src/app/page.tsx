@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { TypingEffect } from "@/components/TypingEffect";
 import { ScrollAnimation } from "@/components/ScrollAnimation";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
+import { BackgroundGrid } from "@/components/BackgroundGrid";
+import { ProjectFilter } from "@/components/ProjectFilter";
+import { FAQ } from "@/components/FAQ";
 
 const skills = [
   { name: "React", icon: "⚛️", level: 95 },
@@ -20,6 +24,7 @@ const projects = [
     tags: ["Next.js", "TypeScript", "Stripe", "PostgreSQL"],
     image: "🛒",
     link: "#",
+    category: "E-Commerce",
   },
   {
     title: "Task Management App",
@@ -27,6 +32,7 @@ const projects = [
     tags: ["React", "Firebase", "Tailwind"],
     image: "✅",
     link: "#",
+    category: "Web App",
   },
   {
     title: "Weather Dashboard",
@@ -34,6 +40,7 @@ const projects = [
     tags: ["Vue.js", "OpenWeather API", "Chart.js"],
     image: "🌤️",
     link: "#",
+    category: "Dashboard",
   },
   {
     title: "AI Content Generator",
@@ -41,6 +48,7 @@ const projects = [
     tags: ["Python", "FastAPI", "OpenAI", "React"],
     image: "🤖",
     link: "#",
+    category: "Web App",
   },
   {
     title: "Social Media Dashboard",
@@ -48,6 +56,7 @@ const projects = [
     tags: ["Next.js", "Prisma", "Tailwind"],
     image: "📊",
     link: "#",
+    category: "Dashboard",
   },
   {
     title: "Real-time Chat App",
@@ -55,6 +64,23 @@ const projects = [
     tags: ["Socket.io", "WebRTC", "Redis"],
     image: "💬",
     link: "#",
+    category: "Mobile",
+  },
+  {
+    title: "Food Delivery App",
+    description: "Multi-vendor food delivery platform with real-time tracking.",
+    tags: ["React Native", "Node.js", "MongoDB"],
+    image: "🍔",
+    link: "#",
+    category: "Mobile",
+  },
+  {
+    title: "Crypto Trading Platform",
+    description: "Professional trading interface with real-time charts and portfolio tracking.",
+    tags: ["Next.js", "WebSocket", "TradingView"],
+    image: "💹",
+    link: "#",
+    category: "Dashboard",
   },
 ];
 
@@ -121,30 +147,65 @@ const blogPosts = [
   },
 ];
 
+const services = [
+  {
+    title: "Web Development",
+    description: "Custom websites and web applications built with modern technologies.",
+    icon: "🌐",
+    price: "From $2,000",
+    features: ["Custom Design", "Responsive Layout", "SEO Optimized", "CMS Integration"],
+  },
+  {
+    title: "Mobile Apps",
+    description: "Native and cross-platform mobile applications for iOS and Android.",
+    icon: "📱",
+    price: "From $5,000",
+    features: ["iOS & Android", "Push Notifications", "API Integration", "App Store Submit"],
+  },
+  {
+    title: "SaaS Development",
+    description: "Scalable software-as-a-service products for your business.",
+    icon: "☁️",
+    price: "From $10,000",
+    features: ["Multi-tenant", "Payment Integration", "Analytics Dashboard", "API Access"],
+  },
+];
+
+const stats = [
+  { value: 50, suffix: "+", label: "Projects Completed" },
+  { value: 30, suffix: "+", label: "Happy Clients" },
+  { value: 5, suffix: "+", label: "Years Experience" },
+  { value: 100, suffix: "%", label: "Client Satisfaction" },
+];
+
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen relative">
+      <BackgroundGrid />
+      
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-[#262626]">
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
           <Link href="/" className="text-xl font-bold text-[#22d3ee]">
             JD
           </Link>
-          <div className="flex gap-8 text-sm">
+          <div className="hidden md:flex gap-8 text-sm">
             <Link href="#about" className="hover:text-[#22d3ee] transition-colors">About</Link>
+            <Link href="#services" className="hover:text-[#22d3ee] transition-colors">Services</Link>
             <Link href="#skills" className="hover:text-[#22d3ee] transition-colors">Skills</Link>
             <Link href="#experience" className="hover:text-[#22d3ee] transition-colors">Experience</Link>
             <Link href="#projects" className="hover:text-[#22d3ee] transition-colors">Projects</Link>
             <Link href="#testimonials" className="hover:text-[#22d3ee] transition-colors">Testimonials</Link>
-            <Link href="#blog" className="hover:text-[#22d3ee] transition-colors">Blog</Link>
+            <Link href="#faq" className="hover:text-[#22d3ee] transition-colors">FAQ</Link>
             <Link href="#contact" className="hover:text-[#22d3ee] transition-colors">Contact</Link>
           </div>
+          <button className="px-4 py-2 bg-[#22d3ee] text-black text-sm font-medium rounded-lg hover:bg-[#06b6d4] transition-colors">
+            Download CV
+          </button>
         </div>
       </nav>
 
-      <section id="hero" className="min-h-screen flex items-center justify-center pt-16 relative overflow-hidden">
+      <section id="hero" className="min-h-screen flex items-center justify-center pt-16 relative">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#22d3ee]/20 via-transparent to-transparent" />
-        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-[#22d3ee]/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
         
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <ScrollAnimation>
@@ -167,7 +228,7 @@ export default function Home() {
             </p>
           </ScrollAnimation>
           <ScrollAnimation delay={400}>
-            <div className="flex gap-4 justify-center">
+            <div className="flex gap-4 justify-center flex-wrap">
               <Link
                 href="#projects"
                 className="px-8 py-3 bg-[#22d3ee] text-black font-semibold rounded-lg hover:bg-[#06b6d4] transition-all hover:scale-105"
@@ -180,6 +241,13 @@ export default function Home() {
               >
                 Contact Me
               </Link>
+              <a
+                href="/resume.pdf"
+                download
+                className="px-8 py-3 border border-[#262626] rounded-lg hover:border-[#22d3ee] hover:text-[#22d3ee] transition-all hover:scale-105"
+              >
+                Download CV
+              </a>
             </div>
           </ScrollAnimation>
         </div>
@@ -191,7 +259,24 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="about" className="py-24 bg-[#171717]">
+      <section className="py-16 bg-[#171717] border-y border-[#262626]">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <ScrollAnimation key={stat.label} delay={index * 100}>
+                <div className="text-center">
+                  <div className="text-4xl md:text-5xl font-bold text-[#22d3ee] mb-2">
+                    <AnimatedCounter end={stat.value} suffix={stat.suffix} />
+                  </div>
+                  <div className="text-[#a3a3a3]">{stat.label}</div>
+                </div>
+              </ScrollAnimation>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="about" className="py-24">
         <div className="max-w-6xl mx-auto px-6">
           <ScrollAnimation>
             <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
@@ -221,20 +306,51 @@ export default function Home() {
                   When I&apos;m not coding, you can find me exploring new technologies, contributing 
                   to open-source projects, or sharing knowledge with the developer community.
                 </p>
-                <div className="grid grid-cols-3 gap-6">
-                  {[
-                    { value: "5+", label: "Years Exp." },
-                    { value: "50+", label: "Projects" },
-                    { value: "30+", label: "Clients" },
-                  ].map((stat) => (
-                    <div key={stat.label} className="text-center p-4 bg-[#1f1f1f] rounded-xl">
-                      <div className="text-3xl font-bold text-[#22d3ee]">{stat.value}</div>
-                      <div className="text-sm text-[#a3a3a3]">{stat.label}</div>
-                    </div>
-                  ))}
+                <div className="flex gap-4">
+                  <Link
+                    href="/resume.pdf"
+                    download
+                    className="px-6 py-3 bg-[#22d3ee] text-black font-semibold rounded-lg hover:bg-[#06b6d4] transition-colors"
+                  >
+                    Download Resume
+                  </Link>
                 </div>
               </div>
             </ScrollAnimation>
+          </div>
+        </div>
+      </section>
+
+      <section id="services" className="py-24 bg-[#171717]">
+        <div className="max-w-6xl mx-auto px-6">
+          <ScrollAnimation>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center">
+              My <span className="text-[#22d3ee]">Services</span>
+            </h2>
+          </ScrollAnimation>
+          <ScrollAnimation delay={100}>
+            <p className="text-[#a3a3a3] text-center mb-12 max-w-2xl mx-auto">
+              Professional development services tailored to your needs
+            </p>
+          </ScrollAnimation>
+          <div className="grid md:grid-cols-3 gap-6">
+            {services.map((service, index) => (
+              <ScrollAnimation key={service.title} delay={index * 100}>
+                <div className="p-8 bg-[#1f1f1f] rounded-2xl border border-[#262626] hover:border-[#22d3ee] transition-all hover:scale-[1.02] group">
+                  <div className="text-5xl mb-4 group-hover:animate-bounce">{service.icon}</div>
+                  <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+                  <p className="text-[#a3a3a3] mb-4">{service.description}</p>
+                  <div className="text-2xl font-bold text-[#22d3ee] mb-4">{service.price}</div>
+                  <ul className="space-y-2">
+                    {service.features.map((feature) => (
+                      <li key={feature} className="flex items-center gap-2 text-sm text-[#a3a3a3]">
+                        <span className="text-[#22d3ee]">✓</span> {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </ScrollAnimation>
+            ))}
           </div>
         </div>
       </section>
@@ -313,37 +429,7 @@ export default function Home() {
               Here are some projects I&apos;ve worked on
             </p>
           </ScrollAnimation>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project, index) => (
-              <ScrollAnimation key={project.title} delay={index * 100}>
-                <div className="bg-[#1f1f1f] rounded-2xl border border-[#262626] overflow-hidden hover:border-[#22d3ee] transition-all hover:scale-[1.02] group">
-                  <div className="h-48 bg-gradient-to-br from-[#262626] to-[#1f1f1f] flex items-center justify-center text-7xl group-hover:scale-110 transition-transform">
-                    {project.image}
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                    <p className="text-[#a3a3a3] mb-4 text-sm">{project.description}</p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-3 py-1 text-xs bg-[#262626] rounded-full text-[#a3a3a3]"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <Link
-                      href={project.link}
-                      className="inline-flex items-center text-[#22d3ee] hover:underline"
-                    >
-                      View Project →
-                    </Link>
-                  </div>
-                </div>
-              </ScrollAnimation>
-            ))}
-          </div>
+          <ProjectFilter projects={projects} />
         </div>
       </section>
 
@@ -390,6 +476,47 @@ export default function Home() {
               </ScrollAnimation>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section id="faq" className="py-24 bg-[#171717]">
+        <div className="max-w-3xl mx-auto px-6">
+          <ScrollAnimation>
+            <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+              Frequently <span className="text-[#22d3ee]">Asked Questions</span>
+            </h2>
+          </ScrollAnimation>
+          <ScrollAnimation delay={100}>
+            <FAQ />
+          </ScrollAnimation>
+        </div>
+      </section>
+
+      <section id="newsletter" className="py-24">
+        <div className="max-w-2xl mx-auto px-6 text-center">
+          <ScrollAnimation>
+            <h2 className="text-4xl font-bold mb-4">Subscribe to My Newsletter</h2>
+          </ScrollAnimation>
+          <ScrollAnimation delay={100}>
+            <p className="text-[#a3a3a3] mb-8">
+              Get the latest updates on web development, tips, and tutorials delivered to your inbox.
+            </p>
+          </ScrollAnimation>
+          <ScrollAnimation delay={200}>
+            <form className="flex gap-4 max-w-md mx-auto">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 px-4 py-3 bg-[#1f1f1f] border border-[#262626] rounded-lg focus:border-[#22d3ee] focus:outline-none transition-colors"
+              />
+              <button
+                type="submit"
+                className="px-6 py-3 bg-[#22d3ee] text-black font-semibold rounded-lg hover:bg-[#06b6d4] transition-colors"
+              >
+                Subscribe
+              </button>
+            </form>
+          </ScrollAnimation>
         </div>
       </section>
 
