@@ -5,17 +5,9 @@ import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { BackgroundGrid } from "@/components/BackgroundGrid";
 import { ProjectFilter } from "@/components/ProjectFilter";
 import { FAQ } from "@/components/FAQ";
-
-const skills = [
-  { name: "React", icon: "⚛️", level: 95 },
-  { name: "TypeScript", icon: "📘", level: 90 },
-  { name: "Next.js", icon: "▲", level: 92 },
-  { name: "Node.js", icon: "🟢", level: 88 },
-  { name: "Python", icon: "🐍", level: 85 },
-  { name: "PostgreSQL", icon: "🐘", level: 82 },
-  { name: "AWS", icon: "☁️", level: 80 },
-  { name: "Docker", icon: "🐳", level: 78 },
-];
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { CustomCursor } from "@/components/CustomCursor";
+import { SkillsTabs } from "@/components/SkillsTabs";
 
 const projects = [
   {
@@ -66,22 +58,6 @@ const projects = [
     link: "#",
     category: "Mobile",
   },
-  {
-    title: "Food Delivery App",
-    description: "Multi-vendor food delivery platform with real-time tracking.",
-    tags: ["React Native", "Node.js", "MongoDB"],
-    image: "🍔",
-    link: "#",
-    category: "Mobile",
-  },
-  {
-    title: "Crypto Trading Platform",
-    description: "Professional trading interface with real-time charts and portfolio tracking.",
-    tags: ["Next.js", "WebSocket", "TradingView"],
-    image: "💹",
-    link: "#",
-    category: "Dashboard",
-  },
 ];
 
 const experience = [
@@ -109,19 +85,19 @@ const testimonials = [
   {
     name: "Sarah Johnson",
     role: "CEO, TechStartup",
-    text: "Absolutely fantastic developer! Delivered our project on time and exceeded expectations. The attention to detail was remarkable.",
+    text: "Absolutely fantastic developer! Delivered our project on time and exceeded expectations.",
     avatar: "👩‍💼",
   },
   {
     name: "Michael Chen",
     role: "CTO, DataFlow",
-    text: "One of the best developers I've worked with. Great communication skills and technical expertise. Highly recommend!",
+    text: "One of the best developers I've worked with. Great communication and technical expertise.",
     avatar: "👨‍💻",
   },
   {
     name: "Emily Davis",
     role: "Product Manager",
-    text: "Transformed our vision into reality. The code quality was excellent and the project was delivered ahead of schedule.",
+    text: "Transformed our vision into reality. Excellent code quality and ahead of schedule.",
     avatar: "👩‍💻",
   },
 ];
@@ -178,17 +154,29 @@ const stats = [
   { value: 100, suffix: "%", label: "Client Satisfaction" },
 ];
 
+const certifications = [
+  { name: "AWS Solutions Architect", issuer: "Amazon Web Services", year: "2024", icon: "🏆" },
+  { name: "Meta Frontend Developer", issuer: "Meta", year: "2023", icon: "🎖️" },
+  { name: "Google Cloud Professional", issuer: "Google", year: "2023", icon: "🎯" },
+  { name: "Advanced React Patterns", issuer: "Frontend Masters", year: "2022", icon: "⚛️" },
+];
+
+const clientLogos = [
+  "🏢", "🚀", "💡", "🎯", "🌟", "💎", "🔷", "🏅"
+];
+
 export default function Home() {
   return (
     <main className="min-h-screen relative">
       <BackgroundGrid />
+      <CustomCursor />
       
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-[#262626]">
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
           <Link href="/" className="text-xl font-bold text-[#22d3ee]">
             JD
           </Link>
-          <div className="hidden md:flex gap-8 text-sm">
+          <div className="hidden lg:flex gap-8 text-sm">
             <Link href="#about" className="hover:text-[#22d3ee] transition-colors">About</Link>
             <Link href="#services" className="hover:text-[#22d3ee] transition-colors">Services</Link>
             <Link href="#skills" className="hover:text-[#22d3ee] transition-colors">Skills</Link>
@@ -198,9 +186,12 @@ export default function Home() {
             <Link href="#faq" className="hover:text-[#22d3ee] transition-colors">FAQ</Link>
             <Link href="#contact" className="hover:text-[#22d3ee] transition-colors">Contact</Link>
           </div>
-          <button className="px-4 py-2 bg-[#22d3ee] text-black text-sm font-medium rounded-lg hover:bg-[#06b6d4] transition-colors">
-            Download CV
-          </button>
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <button className="px-4 py-2 bg-[#22d3ee] text-black text-sm font-medium rounded-lg hover:bg-[#06b6d4] transition-colors">
+              Download CV
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -321,6 +312,43 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="certifications" className="py-24 bg-[#171717]">
+        <div className="max-w-6xl mx-auto px-6">
+          <ScrollAnimation>
+            <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+              Certifications <span className="text-[#22d3ee]">& Awards</span>
+            </h2>
+          </ScrollAnimation>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {certifications.map((cert, index) => (
+              <ScrollAnimation key={cert.name} delay={index * 100}>
+                <div className="p-6 bg-[#1f1f1f] rounded-2xl border border-[#262626] hover:border-[#22d3ee] transition-all hover:scale-[1.02] group">
+                  <div className="text-4xl mb-3 group-hover:animate-bounce">{cert.icon}</div>
+                  <h3 className="font-semibold mb-1">{cert.name}</h3>
+                  <p className="text-sm text-[#a3a3a3] mb-1">{cert.issuer}</p>
+                  <p className="text-xs text-[#22d3ee]">{cert.year}</p>
+                </div>
+              </ScrollAnimation>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 border-y border-[#262626]">
+        <div className="max-w-6xl mx-auto px-6">
+          <ScrollAnimation>
+            <p className="text-center text-[#a3a3a3] mb-8">Trusted by companies worldwide</p>
+          </ScrollAnimation>
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60">
+            {clientLogos.map((logo, index) => (
+              <div key={index} className="text-4xl md:text-5xl hover:opacity-100 transition-opacity cursor-default">
+                {logo}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="services" className="py-24 bg-[#171717]">
         <div className="max-w-6xl mx-auto px-6">
           <ScrollAnimation>
@@ -367,23 +395,9 @@ export default function Home() {
               Technologies I work with daily
             </p>
           </ScrollAnimation>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {skills.map((skill, index) => (
-              <ScrollAnimation key={skill.name} delay={index * 50}>
-                <div className="p-6 bg-[#1f1f1f] rounded-2xl border border-[#262626] hover:border-[#22d3ee] transition-all hover:scale-105 group cursor-default">
-                  <div className="text-4xl mb-3 group-hover:animate-bounce">{skill.icon}</div>
-                  <div className="font-semibold mb-2">{skill.name}</div>
-                  <div className="w-full bg-[#262626] rounded-full h-2">
-                    <div 
-                      className="bg-[#22d3ee] h-2 rounded-full transition-all duration-1000" 
-                      style={{ width: `${skill.level}%` }}
-                    />
-                  </div>
-                  <div className="text-xs text-[#a3a3a3] mt-1">{skill.level}%</div>
-                </div>
-              </ScrollAnimation>
-            ))}
-          </div>
+          <ScrollAnimation delay={200}>
+            <SkillsTabs />
+          </ScrollAnimation>
         </div>
       </section>
 
@@ -479,6 +493,38 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="cta" className="py-24 bg-gradient-to-r from-[#22d3ee]/20 via-blue-600/10 to-[#22d3ee]/20">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <ScrollAnimation>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Let&apos;s Work Together
+            </h2>
+          </ScrollAnimation>
+          <ScrollAnimation delay={100}>
+            <p className="text-[#a3a3a3] mb-8 max-w-2xl mx-auto">
+              Have a project in mind? I&apos;d love to hear about it. Let&apos;s discuss how I can help bring your ideas to life.
+            </p>
+          </ScrollAnimation>
+          <ScrollAnimation delay={200}>
+            <div className="flex gap-4 justify-center flex-wrap">
+              <Link
+                href="#contact"
+                className="px-8 py-3 bg-[#22d3ee] text-black font-semibold rounded-lg hover:bg-[#06b6d4] transition-all hover:scale-105"
+              >
+                Get Started
+              </Link>
+              <a
+                href="/resume.pdf"
+                download
+                className="px-8 py-3 border border-[#262626] rounded-lg hover:border-[#22d3ee] hover:text-[#22d3ee] transition-all hover:scale-105"
+              >
+                Download CV
+              </a>
+            </div>
+          </ScrollAnimation>
+        </div>
+      </section>
+
       <section id="faq" className="py-24 bg-[#171717]">
         <div className="max-w-3xl mx-auto px-6">
           <ScrollAnimation>
@@ -521,73 +567,109 @@ export default function Home() {
       </section>
 
       <section id="contact" className="py-24 bg-[#171717]">
-        <div className="max-w-2xl mx-auto px-6">
+        <div className="max-w-6xl mx-auto px-6">
           <ScrollAnimation>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center">
+            <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
               Get In <span className="text-[#22d3ee]">Touch</span>
             </h2>
           </ScrollAnimation>
-          <ScrollAnimation delay={100}>
-            <p className="text-[#a3a3a3] text-center mb-12">
-              Have a project in mind? Let&apos;s talk!
-            </p>
-          </ScrollAnimation>
-          <ScrollAnimation delay={200}>
-            <form className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-12">
+            <ScrollAnimation>
+              <div className="space-y-8">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2">
-                    Name
-                  </label>
+                  <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
+                  <p className="text-[#a3a3a3] mb-6">
+                    Feel free to reach out for collaborations or just a friendly chat.
+                  </p>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-[#1f1f1f] rounded-xl flex items-center justify-center text-2xl">📧</div>
+                    <div>
+                      <p className="text-sm text-[#a3a3a3]">Email</p>
+                      <p className="font-medium">hello@johndoe.com</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-[#1f1f1f] rounded-xl flex items-center justify-center text-2xl">📱</div>
+                    <div>
+                      <p className="text-sm text-[#a3a3a3]">Phone</p>
+                      <p className="font-medium">+1 (555) 123-4567</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-[#1f1f1f] rounded-xl flex items-center justify-center text-2xl">📍</div>
+                    <div>
+                      <p className="text-sm text-[#a3a3a3]">Location</p>
+                      <p className="font-medium">San Francisco, CA</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="pt-4">
+                  <h4 className="font-semibold mb-4">Follow Me</h4>
+                  <div className="flex gap-4">
+                    {["GitHub", "LinkedIn", "Twitter", "Instagram"].map((social) => (
+                      <a
+                        key={social}
+                        href="#"
+                        className="w-10 h-10 bg-[#1f1f1f] rounded-lg flex items-center justify-center hover:bg-[#22d3ee] hover:text-black transition-colors"
+                      >
+                        {social[0]}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </ScrollAnimation>
+            <ScrollAnimation delay={200}>
+              <form className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
+                    <input
+                      type="text"
+                      id="name"
+                      className="w-full px-4 py-3 bg-[#1f1f1f] border border-[#262626] rounded-lg focus:border-[#22d3ee] focus:outline-none transition-colors"
+                      placeholder="Your name"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
+                    <input
+                      type="email"
+                      id="email"
+                      className="w-full px-4 py-3 bg-[#1f1f1f] border border-[#262626] rounded-lg focus:border-[#22d3ee] focus:outline-none transition-colors"
+                      placeholder="your@email.com"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label htmlFor="subject" className="block text-sm font-medium mb-2">Subject</label>
                   <input
                     type="text"
-                    id="name"
+                    id="subject"
                     className="w-full px-4 py-3 bg-[#1f1f1f] border border-[#262626] rounded-lg focus:border-[#22d3ee] focus:outline-none transition-colors"
-                    placeholder="Your name"
+                    placeholder="Project inquiry"
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="w-full px-4 py-3 bg-[#1f1f1f] border border-[#262626] rounded-lg focus:border-[#22d3ee] focus:outline-none transition-colors"
-                    placeholder="your@email.com"
+                  <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
+                  <textarea
+                    id="message"
+                    rows={5}
+                    className="w-full px-4 py-3 bg-[#1f1f1f] border border-[#262626] rounded-lg focus:border-[#22d3ee] focus:outline-none transition-colors resize-none"
+                    placeholder="Tell me about your project..."
                   />
                 </div>
-              </div>
-              <div>
-                <label htmlFor="subject" className="block text-sm font-medium mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  className="w-full px-4 py-3 bg-[#1f1f1f] border border-[#262626] rounded-lg focus:border-[#22d3ee] focus:outline-none transition-colors"
-                  placeholder="Project inquiry"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  rows={5}
-                  className="w-full px-4 py-3 bg-[#1f1f1f] border border-[#262626] rounded-lg focus:border-[#22d3ee] focus:outline-none transition-colors resize-none"
-                  placeholder="Tell me about your project..."
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full py-4 bg-[#22d3ee] text-black font-semibold rounded-lg hover:bg-[#06b6d4] transition-all hover:scale-[1.02]"
-              >
-                Send Message
-              </button>
-            </form>
-          </ScrollAnimation>
+                <button
+                  type="submit"
+                  className="w-full py-4 bg-[#22d3ee] text-black font-semibold rounded-lg hover:bg-[#06b6d4] transition-all hover:scale-[1.02]"
+                >
+                  Send Message
+                </button>
+              </form>
+            </ScrollAnimation>
+          </div>
         </div>
       </section>
 
@@ -597,18 +679,10 @@ export default function Home() {
             © 2026 John Doe. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <Link href="#" className="text-[#a3a3a3] hover:text-[#22d3ee] transition-colors">
-              GitHub
-            </Link>
-            <Link href="#" className="text-[#a3a3a3] hover:text-[#22d3ee] transition-colors">
-              LinkedIn
-            </Link>
-            <Link href="#" className="text-[#a3a3a3] hover:text-[#22d3ee] transition-colors">
-              Twitter
-            </Link>
-            <Link href="#" className="text-[#a3a3a3] hover:text-[#22d3ee] transition-colors">
-              Instagram
-            </Link>
+            <Link href="#" className="text-[#a3a3a3] hover:text-[#22d3ee] transition-colors">GitHub</Link>
+            <Link href="#" className="text-[#a3a3a3] hover:text-[#22d3ee] transition-colors">LinkedIn</Link>
+            <Link href="#" className="text-[#a3a3a3] hover:text-[#22d3ee] transition-colors">Twitter</Link>
+            <Link href="#" className="text-[#a3a3a3] hover:text-[#22d3ee] transition-colors">Instagram</Link>
           </div>
         </div>
       </footer>
